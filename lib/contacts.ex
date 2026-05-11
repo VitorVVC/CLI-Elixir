@@ -15,4 +15,34 @@ defmodule AgendaCli.Contacts do
       IO.puts("#{contato.id} - #{contato.name} - #{contato.phone}")
     end)
   end
+
+  def delete(contatos, id) do
+    Enum.reject(contatos, fn contato ->
+      contato.id == id
+    end)
+  end
+
+  def show(contatos, id) do
+    contato =
+      Enum.find(contatos, fn contato ->
+        contato.id == id
+      end)
+
+    if contato do
+      IO.puts("ID: #{contato.id}")
+      IO.puts("Nome: #{contato.name}")
+      IO.puts("Telefone: #{contato.phone}")
+    else
+      IO.puts("Contato não encontrado")
+    end
+  end
+
+  def search(contatos, termo) do
+    Enum.filter(contatos, fn contato ->
+      String.contains?(
+        String.downcase(contato.name),
+        String.downcase(termo)
+      )
+    end)
+  end
 end

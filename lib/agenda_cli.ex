@@ -25,6 +25,34 @@ defmodule AgendaCli do
         Store.save(novos)
         loop(novos)
 
+      ["del", id] ->
+        novos =
+          Contacts.delete(
+            contacts,
+            String.to_integer(id)
+          )
+
+        Store.save(novos)
+
+        IO.puts("Contato removido")
+
+        loop(novos)
+
+      ["show", id] ->
+        Contacts.show(
+          contacts,
+          String.to_integer(id)
+        )
+
+        loop(contacts)
+
+      ["search", termo] ->
+        resultado = Contacts.search(contacts, termo)
+
+        Contacts.list(resultado)
+
+        loop(contacts)
+
       _ ->
         IO.puts("Comando inválido")
         loop(contacts)
