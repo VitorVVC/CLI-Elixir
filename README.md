@@ -16,7 +16,7 @@ mix deps.get
 ## Execução
 
 ```bash
-mix run lib/agenda_cli.ex
+mix run -e "AgendaCli.main()"
 ```
 
 ## Comandos disponíveis
